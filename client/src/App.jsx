@@ -14,8 +14,6 @@ function App() {
         <main className ="main">
         
          <UserList />
-
-        
          
         </main>
       
