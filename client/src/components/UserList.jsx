@@ -12,7 +12,7 @@ export default function UserList() {
         userService.getAll()
             .then(result =>{
                 console.log(result);
-                useState(result);
+                setUsers(result);
             })
     }, []);
 
@@ -150,7 +150,11 @@ export default function UserList() {
                         </tr>
                     </thead>
                     <tbody>
-                        <UserListItem />
+                        {users.map(user => <UserListItem 
+                        key = {user._id} 
+                        {...user}
+                        />)}
+                        
                     </tbody>
                 </table>
             </div>
