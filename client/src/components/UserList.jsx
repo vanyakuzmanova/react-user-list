@@ -12,7 +12,7 @@ export default function UserList() {
 
     useEffect(() => {
         userService.getAll()
-            .then(result =>{
+            .then(result => {
                 console.log(result);
                 setUsers(result);
             })
@@ -24,13 +24,40 @@ export default function UserList() {
 
     const closeCreateUserHandler = () => {
         setShowCreate(false);
+    };
+
+    const saveCreateUserHandler = async (e) => {
+        //Stop default form refresh behavior
+        e.preventDefault();
+
+        //Get form data
+        const formData = new FormData(e.target);
+        const userData = Object.fromEntries(formData);
+
+        //create new user to server
+        const newUser = await userService.create(userData);
+        console.log(newUser)
+
+        //update local state
+        setUsers((state) => [...state, newUser])
+
+        //close modal
+        setShowCreate(false);
+      
     }
+
+
 
     return (
         <section className="card users-container">
             <Search />
 
-           {showCreate && <UserCreate onClose={closeCreateUserHandler}/>}
+            {showCreate && (
+                <UserCreate 
+                    onClose={closeCreateUserHandler}
+                    onSave={saveCreateUserHandler}  
+                />)
+        }
 
             {/* <!-- Table component --> */}
             <div className="table-wrapper">
@@ -162,11 +189,11 @@ export default function UserList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map(user => <UserListItem 
-                        key = {user._id} 
-                        {...user}
+                        {users.map(user => <UserListItem
+                            key={user._id}
+                            {...user}
                         />)}
-                        
+
                     </tbody>
                 </table>
             </div>

@@ -1,5 +1,6 @@
 export default function UserCreate({
-    onClose
+    onClose,
+    onSave,
 }) {
 
     return(
@@ -18,7 +19,7 @@ export default function UserCreate({
                   </svg> 
                 </button>
               </header>
-              <form>
+              <form onSubmit={onSave}>
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="firstName">First name</label>
@@ -95,7 +96,7 @@ export default function UserCreate({
                   </div>
                 </div>
                 <div id="form-actions">
-                  <button id="action-save" className="btn" type="submit">Save</button>
+                  <button id="action-save" className="btn" type="submit" >Save</button>
                   <button id="action-cancel" className="btn" type="button" onClick={onClose}>
                     Cancel
                   </button>

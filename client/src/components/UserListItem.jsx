@@ -1,4 +1,4 @@
-import { fromIsoDate } from "../utils/datetimeUtils";
+import { fromIsoDate } from "../utils/dateTimeUtils";
 
 export default function UserListItem({
     firstName,
